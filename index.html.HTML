@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talia Jabeen — Computer Engineering Student</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FAF7F1;
+    --ink:#22262B;
+    --ink-soft:#54595F;
+    --clay:#B5533C;
+    --clay-dark:#9C4531;
+    --gold:#C79A3C;
+    --gold-soft:#EFE0B8;
+    --line:#E7E1D4;
+    --card:#FFFFFF;
+    --radius:18px;
+    --maxw:1180px;
+  }
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
+      --cream:#1B1815;
+      --ink:#F3EFE7;
+      --ink-soft:#C9C2B5;
+      --line:#3A342B;
+      --card:#242019;
+      --gold-soft:#3B3220;
+    }
+  }
+  :root[data-theme="dark"]{
+    --cream:#1B1815;
+    --ink:#F3EFE7;
+    --ink-soft:#C9C2B5;
+    --line:#3A342B;
+    --card:#242019;
+    --gold-soft:#3B3220;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter', system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', Georgia, 'Times New Roman', serif;
+    font-weight:600;
+    margin:0;
+    line-height:1.08;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:color-mix(in srgb, var(--cream) 88%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 0;
+  }
+  .brand{display:flex; align-items:center; gap:12px; font-family:'Fraunces',serif; font-weight:600; font-size:1.15rem;}
+  .brand .mark{
+    width:38px; height:38px; border-radius:11px;
+    background:var(--clay); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces',serif; font-weight:700; font-size:1rem;
+    flex-shrink:0;
+  }
+  .navlinks{display:flex; align-items:center; gap:34px; list-style:none; margin:0; padding:0;}
+  .navlinks a{
+    text-decoration:none; color:var(--ink-soft); font-size:0.98rem; font-weight:500;
+    padding:6px 2px; border-bottom:2px solid transparent; transition:color .15s, border-color .15s;
+  }
+  .navlinks a:hover, .navlinks a:focus-visible{color:var(--ink); border-color:var(--gold);}
+  .nav-cta{
+    background:var(--clay); color:#fff; border:none; border-radius:999px;
+    padding:12px 22px; font-size:0.85rem; font-weight:600; letter-spacing:.02em;
+    cursor:pointer; text-decoration:none; white-space:nowrap;
+    transition:background .15s, transform .15s;
+  }
+  .nav-cta:hover{background:var(--clay-dark); transform:translateY(-1px);}
+  .nav-toggle{display:none; background:none; border:none; font-size:1.6rem; color:var(--ink); cursor:pointer;}
+
+  @media (max-width:860px){
+    .navlinks{
+      position:absolute; top:100%; left:0; right:0;
+      flex-direction:column; align-items:flex-start; gap:0;
+      background:var(--cream); border-bottom:1px solid var(--line);
+      padding:8px 32px 18px; display:none;
+    }
+    .navlinks.open{display:flex;}
+    .navlinks a{width:100%; padding:12px 0; border-bottom:1px solid var(--line);}
+    .nav-toggle{display:block;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{padding:64px 0 40px; position:relative; overflow:hidden;}
+  .hero-grid{
+    display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center;
+  }
+  .eyebrow{
+    color:var(--clay); font-weight:600; font-size:0.95rem; margin-bottom:14px;
+  }
+  .hero h1{font-size:clamp(2.3rem, 4.6vw, 3.4rem); letter-spacing:-0.01em;}
+  .hero h1 em{
+    font-style:italic; font-family:'Fraunces',serif; color:var(--gold); font-weight:500;
+  }
+  .hero p.lead{
+    margin-top:22px; font-size:1.12rem; line-height:1.65; color:var(--ink-soft); max-width:46ch;
+  }
+  .hero-actions{display:flex; gap:16px; margin-top:34px; flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--clay); color:#fff; border:none; border-radius:999px;
+    padding:16px 30px; font-size:0.92rem; font-weight:600; letter-spacing:.02em;
+    cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    transition:background .15s, transform .15s;
+  }
+  .btn-primary:hover{background:var(--clay-dark); transform:translateY(-1px);}
+  .btn-ghost{
+    background:transparent; color:var(--ink); border:1.5px solid var(--line); border-radius:999px;
+    padding:15px 28px; font-size:0.92rem; font-weight:600; text-decoration:none;
+    transition:border-color .15s, background .15s;
+  }
+  .btn-ghost:hover{border-color:var(--ink); background:var(--gold-soft);}
+
+  .hero-visual{position:relative; min-height:420px; display:flex; align-items:center; justify-content:center;}
+  .blob{
+    position:absolute; inset:6% 8%;
+    background:var(--gold);
+    border-radius:38% 62% 55% 45% / 45% 40% 60% 55%;
+    opacity:0.9;
+  }
+  .blob-outline{
+    position:absolute; inset:0%;
+    border:1.5px dashed var(--line);
+    border-radius:50% 50% 45% 55% / 55% 45% 55% 45%;
+  }
+  .laptop-card{
+    position:relative; z-index:2; width:88%;
+    background:var(--card); border-radius:16px; padding:14px;
+    box-shadow:0 24px 50px -20px rgba(20,15,5,.35);
+    border:1px solid var(--line);
+  }
+  .laptop-screen{
+    background:#1C232B; border-radius:9px; padding:20px; color:#F1EFE9;
+    font-family:'Fraunces',serif;
+  }
+  .laptop-screen .tag{
+    display:inline-block; background:var(--clay); color:#fff; font-size:.68rem;
+    font-family:'Inter',sans-serif; font-weight:700; letter-spacing:.06em;
+    padding:4px 10px; border-radius:999px; margin-bottom:14px;
+  }
+  .laptop-screen h3{color:#fff; font-size:1.35rem;}
+  .laptop-screen p{
+    font-family:'Inter',sans-serif; color:#B9C0C8; font-size:.82rem; margin:10px 0 0;
+  }
+  .id-badge{
+    position:absolute; bottom:-26px; right:6%; z-index:3;
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:14px 18px; box-shadow:0 14px 30px -14px rgba(20,15,5,.3);
+    display:flex; align-items:center; gap:12px; min-width:220px;
+  }
+  .id-badge .dot{
+    width:44px; height:44px; border-radius:50%; background:var(--gold-soft);
+    display:flex; align-items:center; justify-content:center; color:var(--clay);
+    font-family:'Fraunces',serif; font-weight:700; flex-shrink:0;
+  }
+  .id-badge .txt strong{display:block; font-size:.9rem;}
+  .id-badge .txt span{font-size:.76rem; color:var(--ink-soft);}
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr; gap:48px;}
+    .hero-visual{min-height:320px; margin-top:10px;}
+    .id-badge{right:4%;}
+  }
+
+  /* ---------- INFO / DETAILS SECTION ---------- */
+  section{padding:70px 0;}
+  .section-head{max-width:640px; margin-bottom:44px;}
+  .section-head .eyebrow{margin-bottom:10px;}
+  .section-head h2{font-size:clamp(1.7rem,3vw,2.3rem);}
+  .section-head p{color:var(--ink-soft); margin-top:14px; font-size:1.02rem; line-height:1.6;}
+
+  .details{background:var(--card); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .detail-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;
+  }
+  .detail-card{
+    background:var(--card); padding:30px 26px;
+  }
+  .detail-card .label{
+    font-size:.78rem; color:var(--clay); font-weight:600; margin-bottom:10px;
+  }
+  .detail-card .value{
+    font-family:'Fraunces',serif; font-size:1.18rem; font-weight:600; line-height:1.3;
+  }
+  .detail-card .value.small{font-size:1.02rem; font-weight:500; font-family:'Inter',sans-serif;}
+  @media (max-width:860px){
+    .detail-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:520px){
+    .detail-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- ABOUT / SKILLS ---------- */
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start;}
+  .about-grid p{color:var(--ink-soft); line-height:1.7; font-size:1.02rem; margin-top:16px;}
+  .skill-list{list-style:none; margin:0; padding:0; display:grid; gap:14px;}
+  .skill-list li{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:16px 20px; background:var(--card); border:1px solid var(--line); border-radius:12px;
+    font-size:.96rem;
+  }
+  .skill-list li span.tag{
+    font-size:.72rem; font-weight:600; color:var(--clay); background:var(--gold-soft);
+    padding:4px 10px; border-radius:999px;
+  }
+  @media (max-width:860px){.about-grid{grid-template-columns:1fr;}}
+
+  /* ---------- CONTACT ---------- */
+  .contact-wrap{
+    background:var(--ink); color:#F3EFE7; border-radius:24px; padding:60px 56px;
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:50px; align-items:center;
+  }
+  .contact-wrap h2{color:#F3EFE7; font-size:clamp(1.7rem,3vw,2.2rem);}
+  .contact-wrap p{color:#C9C2B5; margin-top:14px; line-height:1.65; max-width:44ch;}
+  .contact-list{list-style:none; margin:26px 0 0; padding:0; display:grid; gap:14px;}
+  .contact-list li{display:flex; gap:12px; align-items:center; font-size:.98rem;}
+  .contact-list .ico{
+    width:34px; height:34px; border-radius:9px; background:rgba(255,255,255,.08);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:.95rem;
+  }
+  .contact-form{background:#FAF7F1; border-radius:16px; padding:28px; color:var(--ink);}
+  .contact-form label{display:block; font-size:.82rem; font-weight:600; margin:14px 0 6px;}
+  .contact-form label:first-child{margin-top:0;}
+  .contact-form input, .contact-form textarea{
+    width:100%; border:1px solid var(--line); border-radius:9px; padding:11px 13px;
+    font-family:'Inter',sans-serif; font-size:.92rem; background:#fff; color:var(--ink);
+  }
+  .contact-form textarea{resize:vertical; min-height:80px;}
+  .contact-form button{
+    margin-top:18px; width:100%; background:var(--clay); color:#fff; border:none;
+    border-radius:999px; padding:14px; font-weight:600; font-size:.92rem; cursor:pointer;
+    transition:background .15s;
+  }
+  .contact-form button:hover{background:var(--clay-dark);}
+  .form-note{font-size:.8rem; color:var(--ink-soft); margin-top:10px; text-align:center;}
+  @media (max-width:900px){.contact-wrap{grid-template-columns:1fr; padding:40px 26px;}}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:34px 0; border-top:1px solid var(--line);}
+  .footer-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;}
+  .footer-row span{font-size:.86rem; color:var(--ink-soft);}
+
+  /* ---------- SIGN IN MODAL ---------- */
+  .modal-backdrop{
+    position:fixed; inset:0; background:rgba(20,15,5,.45);
+    display:none; align-items:center; justify-content:center; z-index:100; padding:20px;
+  }
+  .modal-backdrop.open{display:flex;}
+  .modal{
+    background:var(--card); border-radius:18px; padding:34px; max-width:380px; width:100%;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.4); position:relative;
+  }
+  .modal h3{font-size:1.35rem; margin-bottom:6px;}
+  .modal p.sub{color:var(--ink-soft); font-size:.9rem; margin:0 0 20px;}
+  .modal label{display:block; font-size:.82rem; font-weight:600; margin:14px 0 6px;}
+  .modal input{
+    width:100%; border:1px solid var(--line); border-radius:9px; padding:11px 13px;
+    font-family:'Inter',sans-serif; font-size:.92rem; background:var(--cream); color:var(--ink);
+  }
+  .modal button.submit{
+    margin-top:20px; width:100%; background:var(--clay); color:#fff; border:none;
+    border-radius:999px; padding:13px; font-weight:600; font-size:.92rem; cursor:pointer;
+  }
+  .modal-close{
+    position:absolute; top:16px; right:16px; background:none; border:none;
+    font-size:1.3rem; cursor:pointer; color:var(--ink-soft); line-height:1;
+  }
+  :focus-visible{outline:2px solid var(--clay); outline-offset:2px;}
+  @media (prefers-reduced-motion: reduce){*{transition:none !important; scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a href="#top" class="brand"><span class="mark">TJ</span> Talia Jabeen</a>
+      <ul class="navlinks" id="navlinks">
+        <li><a href="#top">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div style="display:flex; align-items:center; gap:14px;">
+        <button class="nav-cta" id="openSignIn" type="button">Sign In</button>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">&#9776;</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Computer Engineering &middot; COMSATS Wah</div>
+        <h1>Building clean systems as a <em>Computer Engineering</em> student</h1>
+        <p class="lead">I'm Talia Jabeen, a Computer Engineering undergraduate who enjoys turning coursework into real, working projects — from embedded systems to full software builds.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-primary">Get in touch</a>
+          <a href="#projects" class="btn-ghost">See my work</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="blob-outline"></div>
+        <div class="blob"></div>
+        <div class="laptop-card">
+          <div class="laptop-screen">
+            <span class="tag">INTRODUCTION</span>
+            <h3>Hi, I'm Talia<br>Jabeen</h3>
+            <p>A Computer Engineering student at COMSATS Wah, learning to build practical software and hardware projects.</p>
+          </div>
+        </div>
+        <div class="id-badge">
+          <div class="dot">TJ</div>
+          <div class="txt">
+            <strong>Talia Jabeen</strong>
+            <span>Reg. No. FA23-BCE-057</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAILS STRIP -->
+  <section class="details" id="details">
+    <div class="wrap">
+      <div class="detail-grid">
+        <div class="detail-card">
+          <div class="label">Name</div>
+          <div class="value">Talia Jabeen</div>
+        </div>
+        <div class="detail-card">
+          <div class="label">Registration No.</div>
+          <div class="value">FA23-BCE-057</div>
+        </div>
+        <div class="detail-card">
+          <div class="label">Department</div>
+          <div class="value">Computer Engineering</div>
+        </div>
+        <div class="detail-card">
+          <div class="label">Email</div>
+          <div class="value small">fa23-bce-057@wah.comsats.edu.pk</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">About Me</div>
+        <h2>A Computer Engineering student who likes building things end to end</h2>
+      </div>
+      <div class="about-grid">
+        <div>
+          <p>I'm currently studying Computer Engineering at COMSATS University Islamabad, Wah Campus. Alongside coursework, I work on practical projects that mix hardware and software, and enjoy solving real problems with code.</p>
+          <p>I'm also exploring freelancing and online work as a way to apply what I learn outside the classroom.</p>
+        </div>
+        <ul class="skill-list">
+          <li>Digital Image Processing <span class="tag">Coursework</span></li>
+          <li>Artificial Intelligence <span class="tag">Coursework</span></li>
+          <li>Embedded Systems <span class="tag">Coursework</span></li>
+          <li>Excel &amp; Data Tools <span class="tag">Freelance</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" style="background:var(--card); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Projects</div>
+        <h2>Recent work</h2>
+      </div>
+      <div class="detail-grid" style="grid-template-columns:repeat(2,1fr);">
+        <div class="detail-card">
+          <div class="label">DIP Course Project</div>
+          <div class="value" style="font-size:1.05rem;">Automatic Number Plate Recognition (ANPR)</div>
+        </div>
+        <div class="detail-card">
+          <div class="label">Independent Report</div>
+          <div class="value" style="font-size:1.05rem;">Deepfake Technology — research &amp; presentation</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-wrap">
+        <div>
+          <h2>Let's talk</h2>
+          <p>Have a project, question, or opportunity in mind? Reach out and I'll get back to you.</p>
+          <ul class="contact-list">
+            <li><span class="ico">@</span> fa23-bce-057@wah.comsats.edu.pk</li>
+            <li><span class="ico">&#9742;</span> +92&nbsp;3XX&nbsp;XXXXXXX</li>
+            <li><span class="ico">&#128205;</span> COMSATS University Islamabad, Wah Campus</li>
+          </ul>
+        </div>
+        <form class="contact-form" onsubmit="event.preventDefault(); this.reset(); document.getElementById('sentNote').style.display='block';">
+          <label for="cf-name">Name</label>
+          <input id="cf-name" type="text" placeholder="Your name" required>
+          <label for="cf-email">Email</label>
+          <input id="cf-email" type="email" placeholder="you@example.com" required>
+          <label for="cf-msg">Message</label>
+          <textarea id="cf-msg" placeholder="Write your message..." required></textarea>
+          <button type="submit">Send message</button>
+          <p class="form-note" id="sentNote" style="display:none;">Thanks — your message has been noted.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <span>&copy; 2026 Talia Jabeen &middot; Computer Engineering, COMSATS Wah</span>
+    <span>Registration No. FA23-BCE-057</span>
+  </div>
+</footer>
+
+<!-- SIGN IN MODAL -->
+<div class="modal-backdrop" id="signInBackdrop">
+  <div class="modal">
+    <button class="modal-close" id="closeSignIn" aria-label="Close">&times;</button>
+    <h3>Sign in</h3>
+    <p class="sub">Access your student dashboard</p>
+    <form onsubmit="event.preventDefault(); document.getElementById('signInBackdrop').classList.remove('open');">
+      <label for="si-email">Email</label>
+      <input id="si-email" type="email" placeholder="you@wah.comsats.edu.pk" required>
+      <label for="si-pass">Password</label>
+      <input id="si-pass" type="password" placeholder="••••••••" required>
+      <button class="submit" type="submit">Sign in</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.getElementById('navToggle').addEventListener('click', function(){
+    document.getElementById('navlinks').classList.toggle('open');
+  });
+  document.getElementById('openSignIn').addEventListener('click', function(){
+    document.getElementById('signInBackdrop').classList.add('open');
+  });
+  document.getElementById('closeSignIn').addEventListener('click', function(){
+    document.getElementById('signInBackdrop').classList.remove('open');
+  });
+  document.getElementById('signInBackdrop').addEventListener('click', function(e){
+    if(e.target === this){ this.classList.remove('open'); }
+  });
+</script>
+
+</body>
+</html>
